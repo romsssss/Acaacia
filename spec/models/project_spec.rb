@@ -40,4 +40,8 @@ RSpec.describe Project, type: :model do
       expect(FactoryGirl.build(:project, amount: -3)).not_to be_valid
     end
   end
+
+  it 'is invalid without a category' do
+    expect(FactoryGirl.build(:project, category: nil)).not_to be_valid
+  end
 end
