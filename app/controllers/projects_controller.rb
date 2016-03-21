@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   def index
-    @projects = Project.all.includes(:category)
+    @projects = Project.all.includes([:category, :location])
   end
 
   # GET /projects/1

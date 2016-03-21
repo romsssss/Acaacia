@@ -4,5 +4,6 @@ FactoryGirl.define do
     description "Project description here"
     amount 1.5
     category
+    location
   end
 end
