@@ -8,16 +8,25 @@
 <% @projects.each_slice(4) do |projects| %>
   <div class="row">
     <% @projects.each do |project| %>
-      <div class="col-md-3 project_thumbnail_container">
-        <div class="project_thumbnail">
-          <a href="<%= project_path(project)%>" style="display: block">
-            <strong><%= project.name %></strong><br />
-            <i><%= project.category_name %></i><br />
-            <i><%= project.location_short %></i><br />
-            <%= project.description %><br />
-            <%= project.amount %><br />
-          </a>
-        </div>
+    <div class="col-sm-6 col-md-4">
+        <a href="<%= project_path(project)%>" class="thumbnail project_thumbnail">
+          <div class="caption">
+            <h3><%= project.name %></h3>
+            <div class="row project_details">
+              <div class="col-md-6">
+                <span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
+                <%= project.location_short %>
+              </div>
+              <div class="col-md-6 tar">
+                <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
+                <%= project.category_name %>
+              </div>
+            </div>
+            <div class="project_description">
+              <%= project.description %>
+            </div>
+          </div>
+        </a>
       </div>
     <% end %>
   </div>
