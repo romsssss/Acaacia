@@ -23,12 +23,15 @@ ActiveRecord::Schema.define(version: 20160321123928) do
   end
 
   create_table "locations", force: :cascade do |t|
+    t.integer  "project_id"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "locations", ["project_id"], name: "index_locations_on_project_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",        null: false
@@ -37,10 +40,8 @@ ActiveRecord::Schema.define(version: 20160321123928) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "category_id"
-    t.integer  "location_id"
   end
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id", using: :btree
-  add_index "projects", ["location_id"], name: "index_projects_on_location_id", using: :btree
 
 end

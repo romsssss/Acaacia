@@ -6,6 +6,7 @@ class Location < ActiveRecord::Base
   after_validation :geocode, :reverse_geocode
 
   def short
+    return nil if address.nil?
     splitted = address.split
     "#{splitted[-2]} #{splitted.last}"
   end
