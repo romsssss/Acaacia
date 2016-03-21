@@ -5,4 +5,6 @@ class Project < ActiveRecord::Base
   validates :description, presence: true, length: { maximum: 300 }
   validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :category, presence: true
+
+  delegate :name, to: :category, prefix: true, allow_nil: false
 end

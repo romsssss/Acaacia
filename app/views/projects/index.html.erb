@@ -1,0 +1,23 @@
+<% content_for :top_menu do -%>
+  <%= link_to 'Nouveau Projet', new_project_path, class: 'btn btn-default navbar-btn' %>
+<% end -%>
+
+
+<p id="notice"><%= notice %></p>
+
+<% @projects.each_slice(4) do |projects| %>
+  <div class="row">
+    <% @projects.each do |project| %>
+      <div class="col-md-3 project_thumbnail_container">
+        <div class="project_thumbnail">
+          <a href="<%= project_path(project)%>" style="display: block">
+            <strong><%= project.name %></strong><br />
+            <i><%= project.category_name %></i><br />
+            <%= project.description %><br />
+            <%= project.amount %><br />
+          </a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

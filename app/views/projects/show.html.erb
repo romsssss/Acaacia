@@ -1,0 +1,14 @@
+<% content_for :top_menu do -%>
+  <%= link_to 'Modifier Projet', edit_project_path(@project), class: 'btn btn-default navbar-btn' %>
+  <%= link_to 'Supprimer', @project, class: 'btn btn-default navbar-btn', method: :delete, data: { confirm: 'Etes vous sure?' } %>
+<% end -%>
+
+<p id="notice"><%= notice %></p>
+
+<h2><%= @project.name %></h2>
+<div>
+<strong>Nom: </strong> <%= @project.name %><br />
+<strong>Description: </strong> <%= @project.description %><br />
+<strong>Catégorie: </strong> <%= @project.category.name %><br />
+<strong>Montant: </strong> <%= @project.amount %><br />
+</div>
