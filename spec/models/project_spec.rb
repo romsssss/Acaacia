@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
+  let(:project) { FactoryGirl.build(:project) }
+
   it 'has a valid factory' do
     expect(FactoryGirl.create(:project)).to be_valid
   end
@@ -46,5 +48,13 @@ RSpec.describe Project, type: :model do
 
   it 'is invalid without a location' do
     expect(FactoryGirl.build(:project, location: nil)).not_to be_valid
+  end
+
+  it "can access category's name" do
+    expect(project).to respond_to(:category_name)
+  end
+
+  it "can access it's location details" do
+    expect(project).to respond_to(:location_short)
   end
 end
