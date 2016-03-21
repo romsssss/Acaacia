@@ -3,19 +3,40 @@
   <%= f.association :category, label: 'Catégorie' %>
   <%= f.input :description, label: 'Description', input_html: { maxlength: 300 } %>
   <%= f.simple_fields_for :location do |l| %>
-    <%= l.input :address, label: 'Adresse' %>
+    <%= l.input :address, label: 'Adresse', placeholder: '' %>
   <% end %>
   <%= f.input :amount, label: 'Montant souhaité' %>
   <%= f.button :submit, button_text %>
 <% end %>
 
 <script type="text/javascript">
+  var address_field_id = 'project_location_attributes_address';
+  var address_field = document.getElementById(address_field_id);
+
   initAddressAutocomplete();
+  if (navigator.geolocation && address_field.value.length == 0) {
+    navigator.geolocation.getCurrentPosition(geocode);
+  }
+
 
   function initAddressAutocomplete() {
     // Create the autocomplete object, restricting the search to geographical location types.
     autocomplete = new google.maps.places.Autocomplete(
-        /** @type {!HTMLInputElement} */(document.getElementById('project_location_attributes_address')),
-        {types: ['geocode']});
+        /** @type {!HTMLInputElement} */(address_field), {types: ['geocode']});
+  }
+
+
+  // Populates address field from latitude and longitude
+  function geocode(position) {
+    geocoder = new google.maps.Geocoder();
+    var latlng = { lat: position.coords.latitude, lng: position.coords.longitude };
+
+    geocoder.geocode({'location': latlng}, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          address_field.value = results[1].formatted_address;
+        }
+      }
+    });
   }
 </script>
