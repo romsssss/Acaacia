@@ -1,3 +1,7 @@
+require 'capybara/rspec'
+Capybara.default_driver = :rack_test
+
+
 # Require support files
 Dir['./spec/support/**/*.rb'].each { |f| require f }
 
