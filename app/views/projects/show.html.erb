@@ -4,10 +4,19 @@
 <% end -%>
 
 <h2><%= @project.name %></h2>
-<div>
-  <strong>Nom: </strong> <%= @project.name %><br />
-  <strong>Catégorie: </strong> <%= @project.category.name %><br />
-  <strong>Adresse: </strong> <%= @project.location_address %><br />
-  <strong>Description: </strong> <%= @project.description %><br />
-  <strong>Montant: </strong> <%= @project.amount %><br />
+
+<div class="row">
+  <div class="col-md-6">
+    <p><label>Nom: </label> <%= @project.name %></p>
+    <p><label>Catégorie: </label> <%= @project.category.name %></p>
+    <p><label>Adresse: </label> <%= @project.location_address %></p>
+    <p><label>Description: </label> <%= @project.description %></p>
+    <p><label>Montant: </label> &euro;<%= @project.amount %></p>
+  </div>
+  <div class="col-md-6" id="project_map"></div>
 </div>
+
+
+<script type='text/javascript'>
+  <%= render partial: 'projects/map', locals: { container: '#project_map', latitude: @project.location.latitude, longitude: @project.location.longitude }, formats: [:js] %>
+</script>
