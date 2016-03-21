@@ -81,5 +81,3 @@ test:
 production:
   <<: *default
   database: acaacia_production
-  username: acaacia
-  password: <%= ENV['ACAACIA_DATABASE_PASSWORD'] %>
