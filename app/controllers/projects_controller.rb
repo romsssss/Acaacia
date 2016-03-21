@@ -13,6 +13,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @project.build_location
   end
 
   # GET /projects/1/edit
@@ -53,6 +54,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params[:project].permit(:name, :description, :amount, :category_id)
+      params[:project].permit(:name, :description, :amount, :category_id, location_attributes: [:address])
     end
 end

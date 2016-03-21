@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
   belongs_to :category
-  has_one :location
+  has_one :location, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :description, presence: true, length: { maximum: 300 }
@@ -10,4 +10,6 @@ class Project < ActiveRecord::Base
 
   delegate :name, to: :category, prefix: true, allow_nil: false
   delegate :address, :short, to: :location, prefix: true, allow_nil: false
+
+  accepts_nested_attributes_for :location
 end

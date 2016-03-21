@@ -2,6 +2,20 @@
   <%= f.input :name, label: 'Titre du projet', input_html: { maxlength: 50 } %>
   <%= f.association :category, label: 'Catégorie' %>
   <%= f.input :description, label: 'Description', input_html: { maxlength: 300 } %>
+  <%= f.simple_fields_for :location do |l| %>
+    <%= l.input :address, label: 'Adresse' %>
+  <% end %>
   <%= f.input :amount, label: 'Montant souhaité' %>
   <%= f.button :submit, button_text %>
 <% end %>
+
+<script type="text/javascript">
+  initAddressAutocomplete();
+
+  function initAddressAutocomplete() {
+    // Create the autocomplete object, restricting the search to geographical location types.
+    autocomplete = new google.maps.places.Autocomplete(
+        /** @type {!HTMLInputElement} */(document.getElementById('project_location_attributes_address')),
+        {types: ['geocode']});
+  }
+</script>
